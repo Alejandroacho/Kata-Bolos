@@ -21,23 +21,62 @@ namespace App;
 
 final class Game
 {
-    public function roll()
+    public function roll($firstRoll, $firstRollScore)
     {
-        $rollScore= rand (0,10);
-        return $rollScore;
+        if ($firstRoll==False AND $firstRollScore==0)
+        {
+            $rollScore=rand(0,10);
+            print PHP_EOL . "First Roll = " . $rollScore;
+            return $rollScore;
+        }
+
+        if ($firstRoll==True AND $firstRollScore!=10)
+        {
+            $pinsActive=(10-$firstRollScore);
+            $rollScore=rand(0,$pinsActive);
+            print PHP_EOL . "Second Roll = " . $rollScore;
+            return $rollScore;
+        }
     }
     public function frame()
     {
+        $scoreRollOne=$this->roll(False,0);
+
+        if ($scoreRollOne!=10)
+        {            
+            $scoreRollTwo=$this->roll(True,$scoreRollOne);
+            $scoreFrame=($scoreRollOne+$scoreRollTwo);
+            if($scoreFrame==10)
+            {
+                $spare=$this->spare();
+                return $scoreFrame;
+            }
+            return $scoreFrame;
+        }
+
+        if ($scoreRollOne==10)
+        {
+            $strike=$this->strike();
+            $scoreFrame=$scoreRollOne;
+            return $scoreFrame;
+        }
 
     }
-    public function score()
+    public function strike()
     {
-
+            print " OLÉ un STRIKE";
+    }
+    public function spare()
+    {
+            print " OLÉ un SPARE";
+    }
+    public function score($playersNumber)
+    {
+        
     }
 }
 
 // ***********************************************
 // *       Made with <3 in Factoria F5           *
 // ***********************************************
-
 ?>

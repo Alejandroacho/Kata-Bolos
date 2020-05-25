@@ -72,6 +72,32 @@ final class Game
     }
     public function score($playersNumber)
     {
+        print PHP_EOL."Partida de ".$playersNumber." jugadores.";
+        $contadorDeJugadores=0;
+        $rounds=10;
+        $score=array();
+        while($contadorDeJugadores<$playersNumber)
+        {
+        $contadorDeJugadores+=1;
+        $jugador="Player ".$contadorDeJugadores;
+        array_push($score,array($jugador)); 
+        }
+        while($rounds>0)
+        {
+            $jugadores=$playersNumber;
+            while($jugadores>0)
+            {
+                $frame=$this->frame();
+                array_push($score[$jugadores-1],$frame);
+                $jugadores-=1;
+            }
+            $rounds-=1;
+        }
+        print_r($score);
+        return $score;
+    }
+    public function final()
+    {
         
     }
 }
@@ -79,4 +105,5 @@ final class Game
 // ***********************************************
 // *       Made with <3 in Factoria F5           *
 // ***********************************************
+
 ?>

@@ -4,8 +4,8 @@ use App\Game;
 use PHPUnit\Framework\TestCase;
 
 final class GameTest extends TestCase
-{
-    //Tests de la función roll:
+{   
+     //Tests de la función roll:
 
     public function test_roll_es_numero()
     {
@@ -78,9 +78,40 @@ final class GameTest extends TestCase
 
         $this->assertLessThanOrEqual($maximumScore, $result);
     }
+
+    //Test de score:
+    
+    public function test_score_devuelve_un_array()
+    {
+        $playersNumber=2;
+
+        $trialScore=new Game;
+        $result=$trialScore->score($playersNumber);
+
+        $this->assertIsArray($result);
+    }
+    public function test_score_contiene_player_1()
+    {
+        $playersNumber=2;
+
+        $trialScore=new Game;
+        $result=$trialScore->score($playersNumber);
+
+        $this->assertContains("Player 1",$result[0]);
+    }
+    public function test_score_contiene_player_2()
+    {
+        $playersNumber=2;
+
+        $trialScore=new Game;
+        $result=$trialScore->score($playersNumber);
+
+        $this->assertContains("Player 2",$result[1]);
+    }
 }
 
 // ***********************************************
 // *       Made with <3 in Factoria F5           *
 // ***********************************************
+
 ?>
